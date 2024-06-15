@@ -224,7 +224,7 @@ func init() { // 插件主体
 			ctx.SendChain(message.Text("嗯！已经修改了"))
 		})
 	// 修改头衔
-	engine.OnRegex(`^(修改头衔|我要头衔|给我头衔).*?(\d+).+?\s*(.*)$`, zero.OnlyGroup, zero.AdminPermission).SetBlock(true).
+	engine.OnRegex(`^修改头衔.*?(\d+).+?\s*(.*)$`, zero.OnlyGroup, zero.AdminPermission).SetBlock(true).
 		Handle(func(ctx *zero.Ctx) {
 			sptitle := ctx.State["regex_matched"].([]string)[2]
 			if sptitle == "" {
@@ -241,7 +241,7 @@ func init() { // 插件主体
 			ctx.SendChain(message.Text("嗯！已经修改了"))
 		})
 	// 申请头衔
-	engine.OnRegex(`^申请头衔\s*(.*)$`, zero.OnlyGroup).SetBlock(true).
+	engine.OnRegex(`^(申请头衔|我要头衔|给我头衔)\s*(.*)$`, zero.OnlyGroup).SetBlock(true).
 		Handle(func(ctx *zero.Ctx) {
 			sptitle := ctx.State["regex_matched"].([]string)[1]
 			if sptitle == "" {
