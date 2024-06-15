@@ -28,7 +28,7 @@ const (
 	hint = "====群管====\n" +
 		"- 禁言@QQ 1分钟\n" +
 		"- 解除禁言 @QQ\n" +
-		"- 我要自闭 1分钟\n" +
+		"- 我要自闭(禁用我) 1分钟\n" +
 		"- 开启全员禁言\n" +
 		"- 解除全员禁言\n" +
 		"- 升为管理@QQ\n" +
@@ -188,7 +188,7 @@ func init() { // 插件主体
 			ctx.SendChain(message.Text("小黑屋释放成功~"))
 		})
 	// 自闭禁言
-	engine.OnRegex(`^(我要自闭|禅定).*?(\d+)(.*)`, zero.OnlyGroup).SetBlock(true).
+	engine.OnRegex(`^(我要自闭|禅定|禁言我).*?(\d+)(.*)`, zero.OnlyGroup).SetBlock(true).
 		Handle(func(ctx *zero.Ctx) {
 			duration := math.Str2Int64(ctx.State["regex_matched"].([]string)[2])
 			switch ctx.State["regex_matched"].([]string)[3] {
@@ -224,7 +224,7 @@ func init() { // 插件主体
 			ctx.SendChain(message.Text("嗯！已经修改了"))
 		})
 	// 修改头衔
-	engine.OnRegex(`^修改头衔.*?(\d+).+?\s*(.*)$`, zero.OnlyGroup, zero.AdminPermission).SetBlock(true).
+	engine.OnRegex(`^(修改头衔|我要头衔|给我头衔).*?(\d+).+?\s*(.*)$`, zero.OnlyGroup, zero.AdminPermission).SetBlock(true).
 		Handle(func(ctx *zero.Ctx) {
 			sptitle := ctx.State["regex_matched"].([]string)[2]
 			if sptitle == "" {
